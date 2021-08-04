@@ -1,0 +1,6 @@
+[submodule "UserApiSql"]
+	path = UserApiSql
+	url = https://github.com/alexeiguriev/UserApiSql.git
+[submodule "UserControlUI"]
+	path = UserControlUI
+	url = https://github.com/alexeiguriev/UserControlUI.git
