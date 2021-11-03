@@ -1,0 +1,42 @@
+Docker
+build
+docker build -t alexeiguriev/user-api-sql-service .
+push
+docker push alexeiguriev/user-api-sql-service
+run
+docker run --name alexeiguriev/user-api-sql-service
+
+Kubernetes
+
+-------------------------------------------------------------------
+DEPLOYMENT
+apply
+kubectl apply -f user-api-sql-depl.yaml
+delete
+kubectl delete deployment user-api-sql-depl
+restart
+kubectl rollout restart deployment user-api-sql-depl
+
+
+mssql-plat-depl
+
+kubectl apply -f mssql-plat-depl.yaml
+kubectl delete deployment mssql-depl
+kubectl rollout restart deployment mssql-depl
+
+-------------------------------------------------------------------
+SERVICES
+apply
+kubectl apply -f user-api-sql-np-srv.yaml
+delete
+kubectl delete service user-api-sql-clusterip-srv
+kubectl delete service user-api-sql-service-srv
+restart
+kubectl rollout restart deployment user-api-sql-np-srv
+
+---run sql instatnce
+1. kubectl apply -f local-pvc.yaml
+2. kubectl create secret generic mssql --from-literal=SA_PASSWORD="pa55w0rd!"
+3. kubectl apply -f mssql-plat-depl.yaml
+---run User API SQL
+4. kubectl apply -f user-api-sql-np-srv.yaml
